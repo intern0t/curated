@@ -1,5 +1,5 @@
 @import "reset";
-@import url("https://fonts.googleapis.com/css?family=PT+Sans");
+@import url("https://fonts.googleapis.com/css?family=PT+Sans|Kristi");
 $background: #353535;
 $DarkBackground: #232323;
 $White: #ffffff;
@@ -7,13 +7,32 @@ $Gray: #afafaf;
 $Blue: #2789e9;
 $Gray_: #50595b;
 
-$GlobalFont: "PT Sans", sans-serif;
+$PTSans: "PT Sans", sans-serif;
+$Kristi: "Kristi", cursive;
+$GlobalFont: $PTSans;
 $GlobalFontSize: 13px;
 
 body {
     background: $background;
     color: $White;
-	font-family: $GlobalFont;
+    font-family: $GlobalFont;
+
+    .logo {
+        text-decoration: none;
+        font-family: $Kristi;
+        color: $White;
+        font-size: $GlobalFontSize * 3;
+        text-align: center;
+        width: 100%;
+        display: block;
+		margin: 50px 0 0 0;
+		color: $Gray;
+		letter-spacing: .5px;
+
+		&:hover{
+			color: $Gray_;
+		}
+    }
 
     .search-wrapper {
         background-image: url("../styles/illustrations/New York.svg");
@@ -104,12 +123,12 @@ body {
                 span.date {
                     font-size: $GlobalFontSize - 1;
                     display: flex;
-					align-items: center;
-					
+                    align-items: center;
+
                     img {
                         width: 16px;
-						height: 16px;
-						margin: 0 5px;
+                        height: 16px;
+                        margin: 0 5px;
                     }
                 }
 
@@ -180,15 +199,16 @@ body {
         }
         h2 {
             font-size: $GlobalFontSize;
-		}
-		
-		a,a:visited{
-			background: $Blue;
-			padding: 2px 5px;
-			text-transform: capitalize;
-			text-decoration: none;
-			color: $White;
-			border-radius: 2px;
-		}
+        }
+
+        a,
+        a:visited {
+            background: $Blue;
+            padding: 2px 5px;
+            text-transform: capitalize;
+            text-decoration: none;
+            color: $White;
+            border-radius: 2px;
+        }
     }
 }

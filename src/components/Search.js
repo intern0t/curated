@@ -14,18 +14,29 @@ class Search extends Component {
 
     render() {
         return (
-            <form className="search-wrapper" onSubmit={this.handleSearchSubmit}>
-                <div className="search-container">
-                    <div className="search-container-section">
-                        <input
-                            type="text"
-                            name="searchkey"
-                            placeholder="Search your news here, type the keyword(s)."
-                            onChange={this.handleSearchChange}
-                        />
+            <div>
+                <a href="/" className="logo">
+                    News
+                    <br />
+                    Personalized &amp; Constantly updated!
+                </a>
+
+                <form
+                    className="search-wrapper"
+                    onSubmit={this.handleSearchSubmit}
+                >
+                    <div className="search-container">
+                        <div className="search-container-section">
+                            <input
+                                type="text"
+                                name="searchkey"
+                                placeholder="Search your news here, type the keyword(s)."
+                                onChange={this.handleSearchChange}
+                            />
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         );
     }
 }
