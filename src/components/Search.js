@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import { searchNews } from "../actions";
 
 class Search extends Component {
     handleSearchChange = e => {
@@ -9,7 +10,12 @@ class Search extends Component {
 
     handleSearchSubmit = e => {
         e.preventDefault();
-        console.log(this.state.searchkey);
+        const { onSearchNews } = this.props;
+        const { searchkey } = this.state;
+
+        if (searchkey && searchkey.length > 0) {
+            onSearchNews(this.state.searchkey);
+        }
     };
 
     render() {

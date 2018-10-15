@@ -7,9 +7,10 @@ export const updateNews = articles => ({
     }
 });
 
-export const searchNews = searchResults => ({
+export const searchNews = toSearch => ({
     type: SEARCH_NEWS,
     payload: {
-        news: searchResults
+        searchKey: toSearch,
+        apiIndex: "NEWSAPI_SEARCH"
     }
 });

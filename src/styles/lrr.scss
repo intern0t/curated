@@ -1,5 +1,5 @@
 @import "reset";
-@import url("https://fonts.googleapis.com/css?family=PT+Sans|Kristi");
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans|Cinzel+Decorative");
 $background: #353535;
 $DarkBackground: #232323;
 $White: #ffffff;
@@ -7,9 +7,9 @@ $Gray: #afafaf;
 $Blue: #2789e9;
 $Gray_: #50595b;
 
-$PTSans: "PT Sans", sans-serif;
-$Kristi: "Kristi", cursive;
-$GlobalFont: $PTSans;
+$FiraSans: "Fira Sans", sans-serif;
+$Cinzel: 'Cinzel Decorative', cursive;
+$GlobalFont: $FiraSans;
 $GlobalFontSize: 13px;
 
 body {
@@ -18,20 +18,17 @@ body {
     font-family: $GlobalFont;
 
     .logo {
+		font-family: $Cinzel !important;
         text-decoration: none;
-        font-family: $Kristi;
         color: $White;
-        font-size: $GlobalFontSize * 3;
+        font-size: $GlobalFontSize * 2;
         text-align: center;
         width: 100%;
         display: block;
 		margin: 50px 0 0 0;
 		color: $Gray;
 		letter-spacing: .5px;
-
-		&:hover{
-			color: $Gray_;
-		}
+		line-height: 55px;
     }
 
     .search-wrapper {
@@ -87,7 +84,8 @@ body {
                 padding: 20px 20px 0 20px;
 
                 h1 {
-                    margin: 5px 0;
+					margin: 5px 0;
+					
                     a,
                     a:visited {
                         font-size: $GlobalFontSize + 4;

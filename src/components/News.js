@@ -1,6 +1,5 @@
 import React from "react";
 import iconBookmarkOutline from "../styles/zondicons/bookmark-outline-add.svg";
-import iconStar from "../styles/zondicons/star-full.svg";
 import iconCalendar from "../styles/zondicons/calendar.svg";
 
 const News = ({ news }) => {
@@ -20,7 +19,13 @@ const News = ({ news }) => {
             </div>
             <div className="news-contents">
                 <h1>
-                    <a href={news.url}>{news.title}</a>
+                    <a
+                        href={news.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {news.title}
+                    </a>
                 </h1>
                 <h3>{news.description}</h3>
                 <p>{news.content}</p>
@@ -31,7 +36,6 @@ const News = ({ news }) => {
                 <div className="news-manage">
                     <div>
                         <img src={iconBookmarkOutline} alt="Add to bookmark!" />
-                        <img src={iconStar} alt="Add to favorite!" />
                     </div>
                     <span className="date">
                         <img src={iconCalendar} alt="Published Date" />
