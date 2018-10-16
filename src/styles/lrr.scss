@@ -172,6 +172,31 @@ body {
         }
     }
 
+	.pagination-container{
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		padding: 10px 0;
+		margin: 20px 0 0 0;
+
+		.pagination{
+			padding: 10px;
+			margin: 0 10px;
+			background: $DarkBackground;
+			color: $White;
+			font-size: $GlobalFontSize - 1;
+
+			&:hover{
+				cursor: pointer;
+			}
+		}
+
+		.current{
+			color: $White;
+			background: $Blue;
+		}
+	}
+
     footer {
         width: 100%;
         min-height: 100px;

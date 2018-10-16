@@ -14,7 +14,13 @@ class Search extends Component {
         const { searchkey } = this.state;
 
         if (searchkey && searchkey.length > 0) {
-            onSearchNews(this.state.searchkey);
+            onSearchNews({
+                searchKey: searchkey,
+                page: {
+                    current: 1,
+                    end: 17
+                }
+            });
         }
     };
 

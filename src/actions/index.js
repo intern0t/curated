@@ -1,16 +1,34 @@
-import { FETCH_NEWS, SEARCH_NEWS } from "./types";
+import { FETCH_NEWS, SEARCH_NEWS, CHANGE_PAGE } from "./types";
 
-export const updateNews = articles => ({
+export const updateNews = newsPayload => ({
     type: FETCH_NEWS,
     payload: {
-        news: articles
+        news: newsPayload.articles,
+        page: {
+            current: 1,
+            end: newsPayload.page.end
+        }
     }
 });
 
-export const searchNews = toSearch => ({
+export const searchNews = searchPayload => ({
     type: SEARCH_NEWS,
     payload: {
-        searchKey: toSearch,
-        apiIndex: "NEWSAPI_SEARCH"
+        searchKey: searchPayload.searchKey,
+        apiIndex: "NEWSAPI_SEARCH",
+        news: searchPayload.articles,
+        page: {
+            current: searchPayload.page.current || 1,
+            end: searchPayload.page.end || 1
+        }
+    }
+});
+
+export const changePage = page => ({
+    type: CHANGE_PAGE,
+    payload: {
+        page: {
+            current: page
+        }
     }
 });
