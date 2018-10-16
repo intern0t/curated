@@ -1,54 +1,75 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateNews, searchNews } from "../actions";
+import { updateNews, searchNews, changePage } from "../actions";
+import uuid from "uuid/v4";
+import CONFIG from "../config";
 import News from "../components/News";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
-import uuid from "uuid/v4";
-import CONFIG from "../config";
+import Pagination from "../components/Pagination";
 
 class NewsContainer extends React.Component {
     componentDidMount() {
         const { onUpdateNews } = this.props;
-        const { apiIndex, searchKeyword } = this.props.news;
+        const { apiIndex, searchKeyword, page } = this.props.news;
 
         fetch(
             `${CONFIG.NEWSAPI_ENDPOINT}${
                 [apiIndex] === "NEWSAPI_HEADLINES"
                     ? CONFIG[apiIndex]
                     : CONFIG[apiIndex].replace("SEARCH_QUERY", searchKeyword)
-            }${CONFIG.NEWSAPI_KEY}`
+            }${CONFIG.NEWSAPI_KEY}&page=${page.current}`
         )
             .then(res => res.json())
             .then(data => {
-                onUpdateNews(data.articles);
+                onUpdateNews({
+                    articles: data.articles,
+                    page: {
+                        current: 1,
+                        end:
+                            data.totalResults % 20 === 0
+                                ? 1
+                                : data.totalResults % 20
+                    }
+                });
             });
     }
 
     componentDidUpdate(prevProps) {
-        const { onUpdateNews } = this.props;
-        const { apiIndex, searchKeyword } = this.props.news;
+        const { onSearchNews } = this.props;
+        const { apiIndex, searchKeyword, page } = this.props.news;
 
         if (
-            prevProps.news.apiIndex !== apiIndex ||
-            prevProps.news.searchKeyword !== searchKeyword
+            prevProps.news.searchKeyword !== searchKeyword ||
+            prevProps.news.page.current !== page.current
         ) {
-            fetch(
-                `${CONFIG.NEWSAPI_ENDPOINT}${
-                    [apiIndex] === "NEWSAPI_HEADLINES"
-                        ? CONFIG[apiIndex]
-                        : CONFIG[apiIndex].replace(
-                              "SEARCH_QUERY",
-                              searchKeyword
-                          )
-                }${CONFIG.NEWSAPI_KEY}`
-            )
-                .then(res => res.json())
-                .then(data => {
-                    onUpdateNews(data.articles);
-                });
+            this.makeAPICall({ onSearchNews, apiIndex, searchKeyword, page });
         }
     }
+
+    makeAPICall = ({ onSearchNews, apiIndex, searchKeyword, page }) => {
+        fetch(
+            `${CONFIG.NEWSAPI_ENDPOINT}${
+                [apiIndex] === "NEWSAPI_HEADLINES"
+                    ? CONFIG[apiIndex]
+                    : CONFIG[apiIndex].replace("SEARCH_QUERY", searchKeyword)
+            }${CONFIG.NEWSAPI_KEY}&page=${page.current}`
+        )
+            .then(res => res.json())
+            .then(data => {
+                onSearchNews({
+                    searchKey: searchKeyword,
+                    articles: data.articles,
+                    page: {
+                        current: page.current,
+                        end:
+                            data.totalResults % 20 === 0
+                                ? 1
+                                : data.totalResults % 20
+                    }
+                });
+            });
+    };
 
     render() {
         const { news } = this.props;
@@ -65,6 +86,10 @@ class NewsContainer extends React.Component {
                         <div className="warn">There's no new news!</div>
                     )}
                 </div>
+                <Pagination
+                    {...this.props.news.page}
+                    onPageChange={this.props.onPageChange}
+                />
                 <Footer />
             </div>
         );
@@ -73,11 +98,14 @@ class NewsContainer extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUpdateNews: news => {
-            dispatch(updateNews(news));
+        onUpdateNews: newsPayload => {
+            dispatch(updateNews(newsPayload));
         },
-        onSearchNews: searchkey => {
-            dispatch(searchNews(searchkey));
+        onSearchNews: searchPayload => {
+            dispatch(searchNews(searchPayload));
+        },
+        onPageChange: page => {
+            dispatch(changePage(page));
         }
     };
 };
