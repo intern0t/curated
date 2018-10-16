@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { searchNews } from "../actions";
 
 class Search extends Component {
     constructor(props) {
@@ -38,6 +37,30 @@ class Search extends Component {
         });
     };
 
+    setAPI = apiKey => {
+        if (apiKey.length === 32) {
+            console.log(apiKey);
+            localStorage.setItem("newsapi_key", apiKey);
+        } else {
+            console.log("Fake key");
+        }
+    };
+
+    onHandleAPIChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
+
+    onHandleAPISet = e => {
+        if (e.key === "Enter") {
+            this.setState({
+                [e.target.name]: e.target.value
+            });
+            this.setAPI(e.target.value);
+        }
+    };
+
     render() {
         const { setAPIHidden } = this.state;
 
@@ -71,9 +94,10 @@ class Search extends Component {
 
                         {!setAPIHidden ? (
                             <APIKeyChangeContainer
-                                onHandleAPIChange={
-                                    this.onSetAPIContainerStatusChange
-                                }
+                                onHandleAPISet={this.onHandleAPISet}
+                                onHandleAPIChange={this.onHandleAPIChange}
+                                setAPI={this.setAPI}
+                                apiKey={this.state.apiKey}
                             />
                         ) : null}
                     </div>
@@ -83,15 +107,21 @@ class Search extends Component {
     }
 }
 
-const APIKeyChangeContainer = ({ onHandleAPIChange }) => {
+const APIKeyChangeContainer = ({
+    onHandleAPISet,
+    onHandleAPIChange,
+    setAPI,
+    apiKey
+}) => {
     return (
         <div>
             <br />
             <div className="search-container-section">
                 <input
                     type="text"
-                    name="searchkey"
+                    name="apiKey"
                     placeholder="Enter your API key from newsapi.org/account"
+                    onKeyPress={onHandleAPISet}
                     onChange={onHandleAPIChange}
                 />
 
@@ -99,6 +129,7 @@ const APIKeyChangeContainer = ({ onHandleAPIChange }) => {
                     className="icon-checkmark"
                     style={{ color: "#00da00" }}
                     title="Set your API Key."
+                    onClick={() => setAPI(apiKey)}
                 />
             </div>
         </div>
