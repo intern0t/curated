@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { updateNews, searchNews, changePage } from "../actions";
-import uuid from "uuid/v4";
 import CONFIG from "../config";
-import News from "../components/News";
+import NewsWrapper from "../components/NewsWrapper";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
 import Pagination from "../components/Pagination";
@@ -77,17 +76,9 @@ class NewsContainer extends React.Component {
         return (
             <div>
                 <Search {...this.props} />
-                <div className="news-container">
-                    {news.news && news.news.length > 0 ? (
-                        news.news.map(_news => {
-                            return <News news={_news} key={uuid()} />;
-                        })
-                    ) : (
-                        <div className="warn">There's no new news!</div>
-                    )}
-                </div>
+                <NewsWrapper news={news} />
                 <Pagination
-                    {...this.props.news.page}
+                    {...news.page}
                     onPageChange={this.props.onPageChange}
                 />
                 <Footer />

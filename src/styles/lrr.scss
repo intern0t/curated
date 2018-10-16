@@ -1,4 +1,4 @@
-@import "reset";
+@import "reset", "style";
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans|Cinzel+Decorative");
 $background: #353535;
 $DarkBackground: #232323;
@@ -8,7 +8,7 @@ $Blue: #2789e9;
 $Gray_: #50595b;
 
 $FiraSans: "Fira Sans", sans-serif;
-$Cinzel: 'Cinzel Decorative', cursive;
+$Cinzel: "Cinzel Decorative", cursive;
 $GlobalFont: $FiraSans;
 $GlobalFontSize: 13px;
 
@@ -18,17 +18,17 @@ body {
     font-family: $GlobalFont;
 
     .logo {
-		font-family: $Cinzel !important;
+        font-family: $Cinzel !important;
         text-decoration: none;
         color: $White;
         font-size: $GlobalFontSize * 2;
         text-align: center;
         width: 100%;
         display: block;
-		margin: 50px 0 0 0;
-		color: $Gray;
-		letter-spacing: .5px;
-		line-height: 55px;
+        margin: 50px 0 0 0;
+        color: $Gray;
+        letter-spacing: 0.5px;
+        line-height: 55px;
     }
 
     .search-wrapper {
@@ -47,6 +47,8 @@ body {
             &-section {
                 display: flex;
                 flex-direction: row;
+                justify-content: center;
+                align-items: center;
                 flex: 1;
 
                 input[type="text"] {
@@ -60,7 +62,17 @@ body {
                     font-family: $GlobalFont;
                     letter-spacing: 0.3px;
                     font-weight: 400;
-                }
+				}
+				
+				span{
+					margin: 0 0 0 20px;
+					color: $Gray;
+
+					&:hover{
+						color: $White;
+						cursor: pointer;
+					}
+				}
             }
         }
     }
@@ -84,8 +96,8 @@ body {
                 padding: 20px 20px 0 20px;
 
                 h1 {
-					margin: 5px 0;
-					
+                    margin: 5px 0;
+
                     a,
                     a:visited {
                         font-size: $GlobalFontSize + 4;
@@ -172,30 +184,30 @@ body {
         }
     }
 
-	.pagination-container{
-		display: flex;
-		justify-content: center;
-		align-content: center;
-		padding: 10px 0;
-		margin: 20px 0 0 0;
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        padding: 10px 0;
+        margin: 20px 0 0 0;
 
-		.pagination{
-			padding: 10px;
-			margin: 0 10px;
-			background: $DarkBackground;
-			color: $White;
-			font-size: $GlobalFontSize - 1;
+        .pagination {
+            padding: 10px;
+            margin: 0 10px;
+            background: $DarkBackground;
+            color: $White;
+            font-size: $GlobalFontSize - 1;
 
-			&:hover{
-				cursor: pointer;
-			}
-		}
+            &:hover {
+                cursor: pointer;
+            }
+        }
 
-		.current{
-			color: $White;
-			background: $Blue;
-		}
-	}
+        .current {
+            color: $White;
+            background: $Blue;
+        }
+    }
 
     footer {
         width: 100%;
@@ -222,16 +234,28 @@ body {
         }
         h2 {
             font-size: $GlobalFontSize;
+            margin: 20px 0;
+        }
+
+        h1,
+        h2 {
+            span {
+                color: $Gray;
+            }
         }
 
         a,
         a:visited {
-            background: $Blue;
             padding: 2px 5px;
             text-transform: capitalize;
             text-decoration: none;
             color: $White;
             border-radius: 2px;
+            border-bottom: 2px solid $Blue;
+
+            span {
+                color: $White;
+            }
         }
     }
 }

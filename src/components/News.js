@@ -1,6 +1,4 @@
 import React from "react";
-import iconBookmarkOutline from "../styles/zondicons/bookmark-outline-add.svg";
-import iconCalendar from "../styles/zondicons/calendar.svg";
 
 const News = ({ news }) => {
     const placeholderImage =
@@ -34,11 +32,15 @@ const News = ({ news }) => {
                 </div>
 
                 <div className="news-manage">
-                    <div>
-                        <img src={iconBookmarkOutline} alt="Add to bookmark!" />
-                    </div>
+                    <span
+                        className="icon-bookmark-outline-add"
+                        title="Add to bookmark!"
+                    />
                     <span className="date">
-                        <img src={iconCalendar} alt="Published Date" />
+                        <span
+                            className="icon-calendar"
+                            title="Published Date"
+                        />
                         &nbsp;
                         {news.publishedAt}
                     </span>
