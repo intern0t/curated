@@ -1,4 +1,5 @@
 import React from "react";
+import LazyLoad from "react-lazyload";
 
 const News = ({ news }) => {
     const placeholderImage =
@@ -6,14 +7,16 @@ const News = ({ news }) => {
     return (
         <div className="news-entry">
             <div className="news-image">
-                <img
-                    src={
-                        news.urlToImage && news.urlToImage.length > 0
-                            ? news.urlToImage
-                            : placeholderImage
-                    }
-                    alt={news.title}
-                />
+                <LazyLoad height={200}>
+                    <img
+                        src={
+                            news.urlToImage && news.urlToImage.length > 0
+                                ? news.urlToImage
+                                : placeholderImage
+                        }
+                        alt={news.title}
+                    />
+                </LazyLoad>
             </div>
             <div className="news-contents">
                 <h1>

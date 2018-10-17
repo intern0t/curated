@@ -61,6 +61,15 @@ class Search extends Component {
         }
     };
 
+    componentDidMount() {
+        let existingAPIKey = localStorage.getItem("apiKey");
+        if (existingAPIKey && existingAPIKey.length === 32) {
+            this.setState({
+                apiKey: existingAPIKey
+            });
+        }
+    }
+
     render() {
         const { setAPIHidden } = this.state;
 
@@ -123,6 +132,7 @@ const APIKeyChangeContainer = ({
                     placeholder="Enter your API key from newsapi.org/account"
                     onKeyPress={onHandleAPISet}
                     onChange={onHandleAPIChange}
+                    value={apiKey}
                 />
 
                 <span
