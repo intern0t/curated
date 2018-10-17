@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateNews, searchNews, changePage } from "../actions";
+import { updateNews, searchNews, changePage, bookmarkToggle } from "../actions";
 import CONFIG from "../config";
 import NewsWrapper from "../components/NewsWrapper";
 import Search from "../components/Search";
@@ -71,12 +71,16 @@ class NewsContainer extends React.Component {
     };
 
     render() {
-        const { news } = this.props;
+        const { news, bookmarked, onBookmarkChanged } = this.props;
 
         return (
             <div>
                 <Search {...this.props} />
-                <NewsWrapper news={news} />
+                <NewsWrapper
+                    news={news}
+                    onBookmarkToggle={onBookmarkChanged}
+                    bookmarked={bookmarked}
+                />
                 <Pagination
                     {...news.page}
                     onPageChange={this.props.onPageChange}
@@ -97,13 +101,17 @@ const mapDispatchToProps = dispatch => {
         },
         onPageChange: page => {
             dispatch(changePage(page));
+        },
+        onBookmarkChanged: news => {
+            dispatch(bookmarkToggle(news));
         }
     };
 };
 
 const mapStateToProps = state => {
     return {
-        news: state.news
+        news: state.news,
+        bookmarked: state.news.bookmarked
     };
 };
 

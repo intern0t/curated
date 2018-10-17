@@ -1,4 +1,4 @@
-@import "reset", "style";
+@import "reset", "style", "mixins";
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans|Cinzel+Decorative");
 $background: #353535;
 $DarkBackground: #232323;
@@ -62,17 +62,17 @@ body {
                     font-family: $GlobalFont;
                     letter-spacing: 0.3px;
                     font-weight: 400;
-				}
-				
-				span{
-					margin: 0 0 0 20px;
-					color: $Gray;
+                }
 
-					&:hover{
-						color: $White;
-						cursor: pointer;
-					}
-				}
+                span {
+                    margin: 0 0 0 20px;
+                    color: $Gray;
+
+                    &:hover {
+                        color: $White;
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }
@@ -149,15 +149,20 @@ body {
                     display: flex;
                     justify-content: space-between;
 
-                    img {
-                        $icon-dimension: 16px;
-                        width: $icon-dimension;
-                        height: $icon-dimension;
-                        opacity: 0.6;
-                        margin: 0 13px 0 0;
+                    .bookmarked {
+                        color: red;
+                    }
+                    span[class^="icon-"] {
+                        margin: 0 5px;
+                        font-size: $GlobalFontSize;
+                        @include transition(color, 0.3s);
 
-                        &:hover {
-                            opacity: 0.4;
+                        &:first-child {
+                            font-size: $GlobalFontSize + 2;
+
+                            &:hover {
+                                color: $Blue;
+                            }
                         }
                     }
                 }

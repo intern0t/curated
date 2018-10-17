@@ -1,4 +1,4 @@
-import { FETCH_NEWS, SEARCH_NEWS, CHANGE_PAGE } from "./types";
+import { FETCH_NEWS, SEARCH_NEWS, CHANGE_PAGE, TOGGLE_BOOKMARK } from "./types";
 
 export const updateNews = newsPayload => ({
     type: FETCH_NEWS,
@@ -30,5 +30,12 @@ export const changePage = page => ({
         page: {
             current: page
         }
+    }
+});
+
+export const bookmarkToggle = news => ({
+    type: TOGGLE_BOOKMARK,
+    payload: {
+        newspayload: news
     }
 });

@@ -1,9 +1,12 @@
 import React from "react";
 import LazyLoad from "react-lazyload";
 
-const News = ({ news }) => {
+const News = ({ news, onBookmarkToggle, bookmarked }) => {
     const placeholderImage =
-        "https://res.cloudinary.com/scarecr0w/image/fetch/c_scale,e_grayscale,q_45,w_600/https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5b14a6d0af40f1f9297ad42e2bf4d384&auto=format&fit=crop&w=1875&q=80";
+        "http://res.cloudinary.com/scarecr0w/image/fetch/c_scale,e_grayscale,q_66,w_420/v1539461519/https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9";
+
+    const bookmarked_ = bookmarked.indexOf(news);
+    console.log(bookmarked_);
     return (
         <div className="news-entry">
             <div className="news-image">
@@ -36,9 +39,18 @@ const News = ({ news }) => {
 
                 <div className="news-manage">
                     <span
-                        className="icon-bookmark-outline-add"
-                        title="Add to bookmark!"
+                        className={`icon-bookmark-outline-add`}
+                        title={
+                            bookmarked_ < 0
+                                ? "Add to bookmark!"
+                                : "Remove from bookmarks!"
+                        }
+                        style={{
+                            color: bookmarked_ >= 0 ? "#2789e9" : "white"
+                        }}
+                        onClick={() => onBookmarkToggle(news)}
                     />
+
                     <span className="date">
                         <span
                             className="icon-calendar"
