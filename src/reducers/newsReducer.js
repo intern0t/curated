@@ -2,7 +2,8 @@ import {
     FETCH_NEWS,
     SEARCH_NEWS,
     CHANGE_PAGE,
-    TOGGLE_BOOKMARK
+    TOGGLE_BOOKMARK,
+    INITIALIZE_BOOKMARKS
 } from "../actions/types";
 
 const initialState = {
@@ -73,6 +74,8 @@ export default (state = initialState, action) => {
                     }
                 };
             }
+        case INITIALIZE_BOOKMARKS:
+            return state;
         default:
             return state;
     }
