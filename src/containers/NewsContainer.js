@@ -110,7 +110,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(changePage(page));
         },
         onBookmarkChanged: news => {
-            bookmarkLocalStoreSetter(news)(dispatch);
+            dispatch(bookmarkLocalStoreSetter(news));
         }
     };
 };
