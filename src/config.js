@@ -5,5 +5,5 @@ module.exports = {
     NEWSAPI_ENDPOINT: "https://newsapi.org/v2/",
     NEWSAPI_HEADLINES: "top-headlines?country=us&apiKey=",
     NEWSAPI_SEARCH: "everything?q=SEARCH_QUERY&apiKey=",
-    GITHUB_REPO_URL: "https://github.com/intern0t/learning-react-redux"
+    GITHUB_REPO_URL: "https://github.com/intern0t/curated"
 };
