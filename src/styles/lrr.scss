@@ -77,6 +77,20 @@ body {
         }
     }
 
+	.bookmark-section{
+		padding: 20px;
+		margin: 20px 20px;
+		background: $DarkBackground;
+		box-shadow: 0 0 25px $DarkBackground;
+		font-size: $GlobalFontSize + 1;
+		color: $Gray;
+
+		.count{
+			color: $Blue;
+			font-size: $GlobalFontSize + 2;
+		}
+	}
+
     .news-container {
         display: flex;
         flex-direction: row;
