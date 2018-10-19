@@ -39,3 +39,12 @@ export const bookmarkToggle = news => ({
         newspayload: news
     }
 });
+
+const writeToLocalStorage = bookmarked => {
+    localStorage.setItem("bookmarked", JSON.stringify(bookmarked));
+};
+
+export const bookmarkLocalStoreSetter = news => (dispatch, getState) => {
+    dispatch(bookmarkToggle(news));
+    writeToLocalStorage(getState().news.bookmarked);
+};
