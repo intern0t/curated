@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { LOCAL_STORAGE } from "../config";
 
 class Search extends Component {
     constructor(props) {
@@ -40,9 +41,11 @@ class Search extends Component {
     setAPI = apiKey => {
         if (apiKey.length === 32) {
             console.log(apiKey);
-            localStorage.setItem("newsapi_key", apiKey);
+            localStorage.setItem([LOCAL_STORAGE.API_KEY], apiKey);
         } else {
-            console.log("Fake key");
+            console.log(
+                "Are you absolutely sure that it is Newsapi.org's API key?"
+            );
         }
     };
 
@@ -62,7 +65,7 @@ class Search extends Component {
     };
 
     componentDidMount() {
-        let existingAPIKey = localStorage.getItem("apiKey");
+        let existingAPIKey = localStorage.getItem([LOCAL_STORAGE.API_KEY]);
         if (existingAPIKey && existingAPIKey.length === 32) {
             this.setState({
                 apiKey: existingAPIKey
