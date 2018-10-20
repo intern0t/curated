@@ -1,4 +1,10 @@
-import { FETCH_NEWS, SEARCH_NEWS, CHANGE_PAGE, TOGGLE_BOOKMARK } from "./types";
+import {
+    FETCH_NEWS,
+    SEARCH_NEWS,
+    CHANGE_PAGE,
+    TOGGLE_BOOKMARK,
+    INITIALIZE_BOOKMARKS
+} from "./types";
 
 export const updateNews = newsPayload => ({
     type: FETCH_NEWS,
@@ -19,7 +25,7 @@ export const searchNews = searchPayload => ({
         news: searchPayload.articles,
         page: {
             current: searchPayload.page.current || 1,
-            end: searchPayload.page.end || 1
+            end: searchPayload.page.end
         }
     }
 });
@@ -54,7 +60,25 @@ const writeToLocalStorage = bookmarked => {
     localStorage.setItem("bookmarked", JSON.stringify(bookmarked));
 };
 
+const fetchLocalStorage = bookmarked => ({
+    type: INITIALIZE_BOOKMARKS,
+    payload: {
+        bookmarked
+    }
+});
+
 export const bookmarkLocalStoreSetter = news => (dispatch, getState) => {
     dispatch(bookmarkToggle(news));
     writeToLocalStorage(getState().news.bookmarked);
+};
+
+export const fetchBookmarksFromLocalStorage = () => (dispatch, getState) => {
+    const getBookmarks = localStorage.getItem("bookmarked");
+    const parsedBookmarks = JSON.parse(getBookmarks);
+
+    if (parsedBookmarks && parsedBookmarks.length > 0) {
+        dispatch(fetchLocalStorage(JSON.parse(getBookmarks)));
+    } else {
+        dispatch(fetchBookmarksFromLocalStorage([]));
+    }
 };

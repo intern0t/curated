@@ -156,6 +156,14 @@ body {
                     }
                 }
 
+                h1,
+                h3,
+                p,
+                span.source,
+                span.date {
+                    overflow: hidden;
+                }
+
                 .news-manage {
                     border-top: 1px dashed $Gray;
                     padding: 20px 0;
@@ -196,16 +204,16 @@ body {
                 display: flex;
                 align-items: flex-end;
                 align-content: center;
-				justify-content: center;
-				padding-bottom: 25px;
+                justify-content: center;
+                padding-bottom: 25px;
 
-				span{
-					font-size: $GlobalFontSize - 3;
-					text-transform: uppercase;
-					letter-spacing: 0.5px;
-					border: 2px solid $White;
-					padding: 5px 10px;
-				}
+                span {
+                    font-size: $GlobalFontSize - 3;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    border: 2px solid $White;
+                    padding: 5px 10px;
+                }
             }
 
             &:hover {

@@ -55,8 +55,8 @@ const News = ({ news, onBookmarkToggle, bookmarked }) => {
                         className={`icon-bookmark-outline-add`}
                         title={
                             bookmarked_
-                                ? "Add to bookmark!"
-                                : "Remove from bookmarks!"
+                                ? "Remove from bookmarks!"
+                                : "Add to bookmark!"
                         }
                         style={{
                             color: bookmarked_ ? "#2789e9" : "white"
