@@ -74,11 +74,11 @@ export const bookmarkLocalStoreSetter = news => (dispatch, getState) => {
 
 export const fetchBookmarksFromLocalStorage = () => (dispatch, getState) => {
     const getBookmarks = localStorage.getItem("bookmarked");
-    const parsedBookmarks = JSON.parse(getBookmarks);
 
-    if (parsedBookmarks && parsedBookmarks.length > 0) {
-        dispatch(fetchLocalStorage(JSON.parse(getBookmarks)));
-    } else {
-        dispatch(fetchBookmarksFromLocalStorage([]));
+    if (getBookmarks && getBookmarks !== null) {
+        const parsedBookmarks = JSON.parse(getBookmarks);
+        if (parsedBookmarks && parsedBookmarks !== null) {
+            dispatch(fetchLocalStorage(parsedBookmarks));
+        }
     }
 };
