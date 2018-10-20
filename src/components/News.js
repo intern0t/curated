@@ -2,8 +2,13 @@ import React from "react";
 import LazyLoad from "react-lazyload";
 
 const News = ({ news, onBookmarkToggle, bookmarked }) => {
+    const unsplashRandom = "https://source.unsplash.com/random/600x512";
     const placeholderImage =
-        "http://res.cloudinary.com/scarecr0w/image/fetch/c_scale,e_grayscale,q_66,w_420/v1539461519/https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9";
+        news.urlToImage &&
+        news.urlToImage.length > 0 &&
+        news.urlToImage.indexOf("www.washingtonpost.com") < 0
+            ? news.urlToImage
+            : unsplashRandom; //"https://res.cloudinary.com/scarecr0w/image/fetch/c_scale,e_grayscale,q_66,w_420/v1539461519/https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9";
 
     const bookmarked_ =
         bookmarked &&
@@ -17,18 +22,18 @@ const News = ({ news, onBookmarkToggle, bookmarked }) => {
 
     return (
         <div className="news-entry">
-            <div className="news-image">
-                <LazyLoad height={200}>
-                    <img
-                        src={
-                            news.urlToImage && news.urlToImage.length > 0
-                                ? news.urlToImage
-                                : placeholderImage
-                        }
-                        alt={news.title}
-                    />
-                </LazyLoad>
-            </div>
+            <LazyLoad height={200}>
+                <div
+                    className="news-image"
+                    style={{
+                        backgroundImage: `url(${placeholderImage})`
+                    }}
+                >
+                    {placeholderImage === unsplashRandom ? (
+                        <span>{"Random Image courtesy of Unsplash!"}</span>
+                    ) : null}
+                </div>
+            </LazyLoad>
             <div className="news-contents">
                 <h1>
                     <a

@@ -62,6 +62,7 @@ export default (state = initialState, action) => {
             );
 
             if (_included) {
+                // Our bookmarked has the news, means remove = return the bookmarked without the passed news.
                 return {
                     ...state,
                     ...{
@@ -74,13 +75,12 @@ export default (state = initialState, action) => {
                                 news.description !==
                                     action.payload.newspayload.description &&
                                 news.content !==
-                                    action.payload.newspayload.content &&
-                                news.source.id !==
-                                    action.payload.newspayload.source.id
+                                    action.payload.newspayload.content
                         )
                     }
                 };
             } else {
+                // Our bookmarked does not have the news, return the bookmarked + our news.
                 return {
                     ...state,
                     ...{
