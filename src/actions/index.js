@@ -3,7 +3,8 @@ import {
     SEARCH_NEWS,
     CHANGE_PAGE,
     TOGGLE_BOOKMARK,
-    INITIALIZE_BOOKMARKS
+    INITIALIZE_BOOKMARKS,
+    VIEW_CHANGE
 } from "./types";
 
 export const updateNews = newsPayload => ({
@@ -82,3 +83,7 @@ export const fetchBookmarksFromLocalStorage = () => (dispatch, getState) => {
         }
     }
 };
+
+export const onViewTypeChange = () => ({
+    type: VIEW_CHANGE
+});

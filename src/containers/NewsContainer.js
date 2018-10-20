@@ -5,7 +5,8 @@ import {
     searchNews,
     changePageMiddleware,
     bookmarkLocalStoreSetter,
-    fetchBookmarksFromLocalStorage
+    fetchBookmarksFromLocalStorage,
+    onViewTypeChange
 } from "../actions";
 import CONFIG from "../config";
 import NewsWrapper from "../components/NewsWrapper";
@@ -89,17 +90,23 @@ class NewsContainer extends React.Component {
         const {
             news,
             bookmarked,
+            viewTypeIsNews,
             onBookmarkChanged,
-            onPageChange
+            onPageChange,
+            onViewChange
         } = this.props;
 
         return (
             <div>
                 <Search {...this.props} />
-                <Bookmarks bookmarked={bookmarked} />
+                <Bookmarks
+                    bookmarked={bookmarked}
+                    onViewChange={onViewChange}
+                    viewTypeIsNews={viewTypeIsNews}
+                />
                 <Pagination {...news.page} onPageChange={onPageChange} />
                 <NewsWrapper
-                    news={news}
+                    news={viewTypeIsNews ? news.news : bookmarked}
                     onBookmarkToggle={onBookmarkChanged}
                     bookmarked={bookmarked}
                 />
@@ -126,6 +133,9 @@ const mapDispatchToProps = dispatch => {
         },
         onBookmarkLoad: () => {
             dispatch(fetchBookmarksFromLocalStorage());
+        },
+        onViewChange: () => {
+            dispatch(onViewTypeChange());
         }
     };
 };
@@ -133,7 +143,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         news: state.news,
-        bookmarked: state.news.bookmarked
+        bookmarked: state.news.bookmarked,
+        viewTypeIsNews: state.news.currentViewIsNews
     };
 };
 

@@ -3,18 +3,20 @@ import {
     SEARCH_NEWS,
     CHANGE_PAGE,
     TOGGLE_BOOKMARK,
-    INITIALIZE_BOOKMARKS
+    INITIALIZE_BOOKMARKS,
+    VIEW_CHANGE
 } from "../actions/types";
 
 const initialState = {
     news: [],
     bookmarked: [],
+    apiIndex: "NEWSAPI_HEADLINES",
+    searchKeyword: "",
+    currentViewIsNews: true,
     page: {
         current: 1,
         end: 1
-    },
-    apiIndex: "NEWSAPI_HEADLINES",
-    searchKeyword: ""
+    }
 };
 
 export default (state = initialState, action) => {
@@ -96,6 +98,13 @@ export default (state = initialState, action) => {
                 ...state,
                 ...{
                     bookmarked: action.payload.bookmarked
+                }
+            };
+        case VIEW_CHANGE:
+            return {
+                ...state,
+                ...{
+                    currentViewIsNews: !state.currentViewIsNews
                 }
             };
         default:
