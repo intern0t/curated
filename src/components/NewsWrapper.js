@@ -17,7 +17,11 @@ const NewsWrapper = ({ news, bookmarked, onBookmarkToggle }) => {
                     );
                 })
             ) : (
-                <div className="warn">There's no new news!</div>
+                <div className="warn">
+                    {
+                        "There seems to be no news! Are you absolutely sure that you set your NewsAPI.org's API key?"
+                    }
+                </div>
             )}
         </div>
     );

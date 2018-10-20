@@ -5,7 +5,7 @@ const Bookmarks = ({ bookmarked }) => {
         <div className="bookmark-section">
             You have <span className="count">{bookmarked.length}</span>{" "}
             bookmarks. Press the <span className="icon-bookmark-outline-add" />{" "}
-            button to add to your bookmarked list.
+            button to add to your bookmarked list. View bookmarks.
         </div>
     );
 };

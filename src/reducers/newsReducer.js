@@ -51,15 +51,32 @@ export default (state = initialState, action) => {
                 }
             };
         case TOGGLE_BOOKMARK:
-            const _included = state.bookmarked.indexOf(
-                action.payload.newspayload
+            const _included = state.bookmarked.some(
+                bookmark =>
+                    bookmark.title === action.payload.newspayload.title &&
+                    bookmark.publishedAt ===
+                        action.payload.newspayload.publishedAt &&
+                    bookmark.description ===
+                        action.payload.newspayload.description &&
+                    bookmark.content === action.payload.newspayload.content
             );
-            if (_included >= 0) {
+
+            if (_included) {
                 return {
                     ...state,
                     ...{
                         bookmarked: state.bookmarked.filter(
-                            news => news !== action.payload.newspayload
+                            news =>
+                                news.title !==
+                                    action.payload.newspayload.title &&
+                                news.publishedAt !==
+                                    action.payload.newspayload.publishedAt &&
+                                news.description !==
+                                    action.payload.newspayload.description &&
+                                news.content !==
+                                    action.payload.newspayload.content &&
+                                news.source.id !==
+                                    action.payload.newspayload.source.id
                         )
                     }
                 };
