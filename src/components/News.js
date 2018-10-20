@@ -6,6 +6,7 @@ const News = ({ news, onBookmarkToggle, bookmarked }) => {
         "http://res.cloudinary.com/scarecr0w/image/fetch/c_scale,e_grayscale,q_66,w_420/v1539461519/https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9";
 
     const bookmarked_ = bookmarked.indexOf(news);
+    console.log(bookmarked_);
     return (
         <div className="news-entry">
             <div className="news-image">
@@ -45,7 +46,7 @@ const News = ({ news, onBookmarkToggle, bookmarked }) => {
                                 : "Remove from bookmarks!"
                         }
                         style={{
-                            color: bookmarked_ >= 0 ? "#2789e9" : "white"
+                            color: bookmarked_ > -1 ? "#2789e9" : "white"
                         }}
                         onClick={() => onBookmarkToggle(news)}
                     />
