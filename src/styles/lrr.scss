@@ -84,10 +84,23 @@ body {
         box-shadow: 0 0 25px $DarkBackground;
         font-size: $GlobalFontSize + 1;
         color: $Gray;
+        line-height: $GlobalFontSize * 2;
 
         .count {
             color: $Blue;
             font-size: $GlobalFontSize + 2;
+        }
+        .view-bookmarks {
+            color: $White;
+            background: $Blue;
+            cursor: pointer;
+			@include transition(background, 0.3s);
+			padding: 5px 7px;
+			border-radius: 2px;
+
+            &:hover {
+                background: $Gray;
+            }
         }
     }
 

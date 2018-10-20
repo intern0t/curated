@@ -5,8 +5,8 @@ import uuid from "uuid/v4";
 const NewsWrapper = ({ news, bookmarked, onBookmarkToggle }) => {
     return (
         <div className="news-container">
-            {news.news && news.news.length > 0 ? (
-                news.news.map(_news => {
+            {news && news.length > 0 ? (
+                news.map(_news => {
                     return (
                         <News
                             news={_news}
@@ -17,11 +17,7 @@ const NewsWrapper = ({ news, bookmarked, onBookmarkToggle }) => {
                     );
                 })
             ) : (
-                <div className="warn">
-                    {
-                        "There seems to be no news! Are you absolutely sure that you set your NewsAPI.org's API key?"
-                    }
-                </div>
+                <div className="warn">{"There seems to be no news!"}</div>
             )}
         </div>
     );
