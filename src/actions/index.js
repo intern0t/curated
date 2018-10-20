@@ -33,6 +33,16 @@ export const changePage = page => ({
     }
 });
 
+export const changePageMiddleware = page => (dispatch, getState) => {
+    let { current } = getState().news.bookmarked;
+
+    if (current !== page) {
+        dispatch(changePage(page));
+    } else {
+        dispatch(changePage(current));
+    }
+};
+
 export const bookmarkToggle = news => ({
     type: TOGGLE_BOOKMARK,
     payload: {

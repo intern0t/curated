@@ -15,7 +15,7 @@ const Pagination = ({ current, end, onPageChange }) => {
                 key={`page-first`}
                 title={`Go to the first page.`}
                 onClick={() => {
-                    onPageChange(1);
+                    return current !== 1 ? onPageChange(1) : null;
                 }}
             >
                 <span className="icon-arrow-long-left" />
@@ -29,7 +29,7 @@ const Pagination = ({ current, end, onPageChange }) => {
                         key={`page-${page}`}
                         title={`Go to page ${page}`}
                         onClick={() => {
-                            onPageChange(page);
+                            return page !== current ? onPageChange(page) : null;
                         }}
                     >
                         {page}
@@ -41,7 +41,7 @@ const Pagination = ({ current, end, onPageChange }) => {
                 key={`page-end`}
                 title={`Go to the last page. (${end})`}
                 onClick={() => {
-                    onPageChange(end);
+                    return end !== current ? onPageChange(end) : null;
                 }}
             >
                 <span className="icon-arrow-long-right" />

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
     updateNews,
     searchNews,
-    changePage,
+    changePageMiddleware,
     bookmarkLocalStoreSetter
 } from "../actions";
 import CONFIG from "../config";
@@ -77,21 +77,24 @@ class NewsContainer extends React.Component {
     };
 
     render() {
-        const { news, bookmarked, onBookmarkChanged } = this.props;
+        const {
+            news,
+            bookmarked,
+            onBookmarkChanged,
+            onPageChange
+        } = this.props;
 
         return (
             <div>
                 <Search {...this.props} />
                 <Bookmarks bookmarked={bookmarked} />
+                <Pagination {...news.page} onPageChange={onPageChange} />
                 <NewsWrapper
                     news={news}
                     onBookmarkToggle={onBookmarkChanged}
                     bookmarked={bookmarked}
                 />
-                <Pagination
-                    {...news.page}
-                    onPageChange={this.props.onPageChange}
-                />
+                <Pagination {...news.page} onPageChange={onPageChange} />
                 <Footer />
             </div>
         );
@@ -107,7 +110,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(searchNews(searchPayload));
         },
         onPageChange: page => {
-            dispatch(changePage(page));
+            dispatch(changePageMiddleware(page));
         },
         onBookmarkChanged: news => {
             dispatch(bookmarkLocalStoreSetter(news));
