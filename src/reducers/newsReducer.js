@@ -92,7 +92,12 @@ export default (state = initialState, action) => {
                 };
             }
         case INITIALIZE_BOOKMARKS:
-            return state;
+            return {
+                ...state,
+                ...{
+                    bookmarked: action.payload.bookmarked
+                }
+            };
         default:
             return state;
     }

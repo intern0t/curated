@@ -4,7 +4,8 @@ import {
     updateNews,
     searchNews,
     changePageMiddleware,
-    bookmarkLocalStoreSetter
+    bookmarkLocalStoreSetter,
+    fetchBookmarksFromLocalStorage
 } from "../actions";
 import CONFIG from "../config";
 import NewsWrapper from "../components/NewsWrapper";
@@ -15,7 +16,7 @@ import Bookmarks from "../components/Bookmarks";
 
 class NewsContainer extends React.Component {
     componentDidMount() {
-        const { onUpdateNews } = this.props;
+        const { onUpdateNews, onBookmarkLoad } = this.props;
         const { apiIndex, searchKeyword, page } = this.props.news;
 
         fetch(
@@ -37,7 +38,8 @@ class NewsContainer extends React.Component {
                                 : data.totalResults % 20
                     }
                 });
-            });
+            })
+            .then(onBookmarkLoad());
     }
 
     componentDidUpdate(prevProps) {
@@ -58,21 +60,28 @@ class NewsContainer extends React.Component {
                 [apiIndex] === "NEWSAPI_HEADLINES"
                     ? CONFIG[apiIndex]
                     : CONFIG[apiIndex].replace("SEARCH_QUERY", searchKeyword)
-            }${CONFIG.NEWSAPI_KEY}&page=${page.current}`
+            }${CONFIG.NEWSAPI_KEY}${
+                page.current ? "&page=" + page.current : ""
+            }`
         )
             .then(res => res.json())
             .then(data => {
-                onSearchNews({
-                    searchKey: searchKeyword,
-                    articles: data.articles,
-                    page: {
-                        current: page.current,
-                        end:
-                            data.totalResults % 20 === 0
-                                ? 1
-                                : data.totalResults % 20
-                    }
-                });
+                if (data && data.status && data.status === "error") {
+                } else {
+                    onSearchNews({
+                        searchKey: searchKeyword,
+                        articles: data.articles,
+                        page: {
+                            current: page.current,
+                            end:
+                                data.totalResults / 20 < 1
+                                    ? 1
+                                    : Math.ceil(data.totalResults / 20) > 50
+                                        ? 50
+                                        : Math.ceil(data.totalResults / 20)
+                        }
+                    });
+                }
             });
     };
 
@@ -114,6 +123,9 @@ const mapDispatchToProps = dispatch => {
         },
         onBookmarkChanged: news => {
             dispatch(bookmarkLocalStoreSetter(news));
+        },
+        onBookmarkLoad: () => {
+            dispatch(fetchBookmarksFromLocalStorage());
         }
     };
 };
