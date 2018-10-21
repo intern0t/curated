@@ -70,7 +70,12 @@ const News = ({ news, onBookmarkToggle, bookmarked }) => {
                             title="Published Date"
                         />
                         &nbsp;
-                        {news.publishedAt}
+                        {news.publishedAt
+                            ? news.publishedAt
+                                  .slice(0, -1)
+                                  .split("T")
+                                  .join(" ")
+                            : null}
                     </span>
                 </div>
             </div>
