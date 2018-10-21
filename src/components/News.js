@@ -72,7 +72,7 @@ const News = ({ news, onBookmarkToggle, bookmarked }) => {
                         &nbsp;
                         {news.publishedAt
                             ? news.publishedAt
-                                  .substring(0, news.publishedAt.length - 1)
+                                  .slice(0, -1)
                                   .split("T")
                                   .join(" ")
                             : null}
