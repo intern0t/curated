@@ -21,10 +21,10 @@ class NewsContainer extends React.Component {
         const { apiIndex, searchKeyword, page } = this.props.news;
 
         fetch(
-            `${CONFIG.NEWSAPI_ENDPOINT}${
-                [apiIndex] === "NEWSAPI_HEADLINES"
-                    ? CONFIG[apiIndex]
-                    : CONFIG[apiIndex].replace("SEARCH_QUERY", searchKeyword)
+            `${CONFIG.PROXY}${CONFIG.NEWSAPI_ENDPOINT}${
+            [apiIndex] === "NEWSAPI_HEADLINES"
+                ? CONFIG[apiIndex]
+                : CONFIG[apiIndex].replace("SEARCH_QUERY", searchKeyword)
             }${CONFIG.NEWSAPI_KEY}&page=${page.current}`
         )
             .then(res => res.json())
@@ -57,12 +57,12 @@ class NewsContainer extends React.Component {
 
     makeAPICall = ({ onSearchNews, apiIndex, searchKeyword, page }) => {
         fetch(
-            `${CONFIG.NEWSAPI_ENDPOINT}${
-                [apiIndex] === "NEWSAPI_HEADLINES"
-                    ? CONFIG[apiIndex]
-                    : CONFIG[apiIndex].replace("SEARCH_QUERY", searchKeyword)
+            `${CONFIG.PROXY}${CONFIG.NEWSAPI_ENDPOINT}${
+            [apiIndex] === "NEWSAPI_HEADLINES"
+                ? CONFIG[apiIndex]
+                : CONFIG[apiIndex].replace("SEARCH_QUERY", searchKeyword)
             }${CONFIG.NEWSAPI_KEY}${
-                page.current ? "&page=" + page.current : ""
+            page.current ? "&page=" + page.current : ""
             }`
         )
             .then(res => res.json())

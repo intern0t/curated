@@ -1,4 +1,5 @@
 module.exports = {
+    PROXY: "https://cors-anywhere.herokuapp.com/",
     NEWSAPI_KEY:
         localStorage.getItem("newsapi_key") ||
         "0868d8876ce94ef0858efb79c21af261",
