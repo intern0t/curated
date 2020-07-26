@@ -25,5 +25,6 @@ Special Thanks to -
 1. [Icomoon](https://icomoon.io) for their icons.
 1. [City Illustrations](https://gumroad.com/l/city-skylines) for `New York.svg`.
 1. [Unsplash's Random Images](https://source.unsplash.com/) for random images to replace my broken images. Current usage: `https://source.unsplash.com/random/600x512`
+1. [CORS Anywhere](https://cors-anywhere.herokuapp.com/) for being an awesome proxy.
 
 ![Footer](https://i.imgur.com/YFzrPHt.png)
